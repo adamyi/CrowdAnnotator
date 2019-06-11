@@ -15,7 +15,11 @@ For auto-generation of categories definition in that js file, see [categories](c
 directory
 
 ## User Interface
+#### Step 1
 ![Step 1](myScrubber/static/img/intro1.jpg)
+#### Step 2
 ![Step 2](myScrubber/static/img/intro2.jpg)
+#### Step 3
 ![Step 3](myScrubber/static/img/intro3.jpg)
+#### Step 4
 ![Step 4](myScrubber/static/img/intro4.jpg)
