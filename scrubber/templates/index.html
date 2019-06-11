@@ -1,0 +1,268 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Text annotation crowd interface">
+    <meta name="keywords" content="annotation,PII,scrubber">
+    <meta name="author" content="Adam Yi">
+    <title>Sensitive Data Annotation Task</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <!--[if lt IE 9]> <script src="js/html5shiv.min.js"></script> <script src="js/respond.min.js"></script> <![endif]-->
+</head>
+
+<body>
+    <div id="scrubPopover" style="display: none; z-index: 1;" class="popover scrubPopover">
+    </div>
+    <!-- Modal -->
+    <div id="mturkModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Welcome</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Please provide your mTurk id.</p>
+                    <input class="form-control" type="text" id="mTurk_id" /><br>
+                    If you are just playing around, have no idea what mTurk ID is, and do NOT intend to receive payment, you can use "test" as ID.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="mTurk_submit">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-1" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Introduction</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Welcome. There will be 3 tasks in this HIT. In each task, you will read an instant messaging conversation. Your job is to spot sensitive information within, and label those info according to their categories. Click "continue" for a short tutorial.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-continue">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tutorial (1/4)</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{% static 'img/intro1.jpg' %}" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-continue">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-3" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tutorial (2/4)</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{% static 'img/intro2.jpg' %}" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-continue">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-4" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tutorial (3/4)</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{% static 'img/intro3.jpg' %}" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-continue">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-5" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tutorial (4/4)</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="{% static 'img/intro4.jpg' %}" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-endtutorial">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-warmup" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Let's get started!</h4>
+                </div>
+                <div class="modal-body">
+                    That's all! Let's begin with a warm-up task to try it out. The official 3 tasks will come after the warm-up task. We will pay you after you complete those three tasks. Check the left panel for examples to annotate. Please enjoy.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-complete">Start HIT</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="introModal-normal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Let's get started!</h4>
+                </div>
+                <div class="modal-body">
+                    That's all! Now let's begin with your 3 tasks. We will pay you after you complete those five tasks. Please enjoy.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info intro-complete">Start HIT</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="codeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thank You</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Below is your code for mTurk. Feel free to do more tasks but we won't pay for the extra tasks.</p>
+                    <center><pre id="redeem_code"></pre></center>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <p></p>
+                <div class="cover-container">
+                        <div id="alerts-container">
+                            <div class="alert alert-info" style="text-align:left; font-size: 12px;">
+                                In this task, you will read an instant messaging conversation and annotate words or groups of words that are potentially sensitive. We have provided a few examples on the left and a list of data categories for you to annotate. For example, some word/group of words may represent name of a person/organization/place, or date/time, or username/password and so on. For each of such word/group of words: 
+                                <br>
+                                <br>1) Select the text portion, and annotate the desired category by clicking the appropriate label.
+                                <br>2) If there is no appropriate label, you can add a new one by clicking <b>Add New</b>.
+                                <br>3) If you want to undo an annotation, select the annotation click <b>Undo</b>.
+                                <br>4) Click the <b>Next Task</b> button to submit annotations and proceed to the next task.
+                                <br>
+                                <br>To see some examples, please refer to the left bar.
+                                <br><b>For each annotation, please do not annotate more than you should. For example, do not annotate "email:" as part of the email annotation for a message "email: xxx@yyy.zzz". </b>
+                                <br>NOTE: You cannot skip tasks, and will be only paid for the first 3 tasks (not including the warm-up task at the beginning) in this HIT.</div>
+                        </div>
+                </div>
+            <div class="side-content">
+                <div class="alert alert-warning" style="text-align:left"><center>----Sensitive Data Examples----</center>
+                    <br><br><h5>Organization:</h5><i>&quot;Enron Corp.&quot;, &quot;Amazon Inc.&quot;</i>,...
+                    <br><br><h5>Product/Service/App/Production name: </h5>&quot;took a <i>Uber</i>&quot;, &quot;<i>Amazon Echo&quot;</i>, &quot;, &quot;<i>Ghost in The Shell&quot;</i>...
+                    <br><br><h5>Date:</h5><i>&quot;tomorrow&quot;, &quot;this Friday&quot;, &quot;09/08/2017&quot;, &quot;this weekend&quot;</i>,...
+                    <br><br><h5>Time of Day:</h5><i>&quot;5pm&quot;, &quot;in 20mins&quot;, &quot;Friday night&quot;</i>,...
+                    <br><br><h5>Event name:</h5><i>&quot;Golf course&quot;, &quot;Taylor's concert&quot;</i>,...
+                    <br><br><h5>Other place name:</h5><i>&quot;home&quot;, &quot;campus&quot;, &quot;gym&quot;, &quot;Peter Luger's&quot;, &quot;4th floor&quot;</i>,...
+                    <br><br><h5>Quantity:</h5><i>balance amount, price amount</i>,...
+                    <br><br><h5>Code:</h5><i>password, driver license number, passport number, confirmation number</i>,...
+                    <br><br><h5>Social group:</h5><i>&quot;scientists&quot;, &quot;the HR people&quot;, &quot;interns&quot;, &quot;grad students&quot;, &quot;self driving car engineers&quot;</i>,...
+                    <br><br><h5>Specific term:</h5><i>&quot;velodyne&quot;, &quot;ML&quot;, &quot;backpropagation&quot;, &quot;signal processing&quot;</i>,...
+                </div>
+            </div>
+            <div class="central-content">
+                <div class="cover-container">
+                    <div class="masthead clearfix">
+                        <!--div class="inner">
+                            <h3 class="masthead-brand">Scrubber</h3-->
+                            <!--ul class="nav masthead-nav">
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="https://git.yiad.am/adamyi/">Git Repo</a></li>
+                            </ul>
+                        </div-->
+                    </div>
+                    <div class="inner cover" id="main-cover">
+                        <p></p>
+                        <form id="form" accept-charset="utf-8">
+                            <input type="hidden" name="hit_id" id="hit_id" /> {% csrf_token %}
+                            <div class="form-inline lead">
+                                <div class="col-lg-12" style="margin-bottom: 15px;" id="form_content">
+                                </div>
+                                <input type="hidden" id="task_id" name="task_id" value="">
+                                <input type="hidden" id="msg" name="msg" value="">
+                            </div>
+                            <center>
+                                <div class="form-inline lead">
+                                    <div class="form-group">
+                                        <button id="submit" name="submit" type="submit" class="btn btn-lg btn-info" onclick="event.preventDefault();submitTask();" disabled>Next Task</button>
+                                        <button id="reset" class="btn btn-lg btn-info" onclick="event.preventDefault();resetTask();" style="display: none;">Reset Annotation</button>
+                                    </div>
+                                </div>
+                            </center>
+                            <br>
+                            <br>
+                            <br>
+                            <!--p style="margin-bottom: 25px;"><span class="label label-danger">WARNING</span> This site is not responsible for the generated results. Use it at your own risk.</p-->
+                        </form>
+                    </div>
+                    <!--div class="mastfoot">
+                    <div class="inner">
+                        <p>&copy; copyright info</p>
+                    </div>
+                    </div!-->
+                </div>
+            </div>
+        </div>
+        <script>
+            var scrubber_csrf_token = '{{csrf_token}}';
+        </script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/scrubber.js' %}"></script>
+</body>
+
+</html>
