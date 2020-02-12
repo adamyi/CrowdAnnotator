@@ -4,7 +4,7 @@ cymem==1.31.2
 cytoolz==0.8.2
 dill==0.2.6
 dj-database-url==0.4.2
-Django==1.11.23
+Django==1.11.28
 ftfy==4.4.3
 gunicorn==19.7.1
 html5lib==0.999999999
